@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:location/location.dart';
 
-
 class HomeScreenNew extends StatefulWidget {
   const HomeScreenNew({Key? key}) : super(key: key);
 
@@ -16,7 +15,6 @@ class HomeScreenNew extends StatefulWidget {
 }
 
 class _HomeScreenNewState extends State<HomeScreenNew> {
-
   SnackBar _locationSB = SnackBar(
     content: Text('Device location enabled'),
   );
@@ -27,13 +25,13 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
 
   _checkPermissions() async {
     Location location = Location();
-    bool permission = await location.hasPermission() == PermissionStatus.granted;
+    bool permission =
+        await location.hasPermission() == PermissionStatus.granted;
     print("PERMISSION $permission");
     if (!permission) {
       ScaffoldMessenger.of(context).showSnackBar(_locationNSB);
       // await location.requestPermission();
-    }
-    else {
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(_locationSB);
     }
   }
@@ -41,99 +39,106 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
   final FlutterWebviewPlugin _web = FlutterWebviewPlugin();
   late Timer _timer;
   // String formattedDateTime = DateFormat('yyyy-MM-dd\nhh:mm:ss a').format(DateTime.now());  //large
-  String formattedDateTime = DateFormat('yyyy-MM-dd | hh:mm:ss a').format(DateTime.now());
+  String formattedDateTime =
+      DateFormat('yyyy-MM-dd | hh:mm:ss a').format(DateTime.now());
   // WebviewScaffold webviewScaffold = WebviewScaffold(url: "https://fianz.com/",)
 
   @override
   void initState() {
-    _checkPermissions();
-    _timer = Timer.periodic(const Duration(milliseconds: 500), (timer) => _update());
+    // _checkPermissions();
+    _timer =
+        Timer.periodic(const Duration(milliseconds: 500), (timer) => _update());
     super.initState();
   }
 
   void _update() {
     setState(() {
       // formattedDateTime = DateFormat('yyyy-MM-dd\nhh:mm:ss a').format(DateTime.now());  //large
-      formattedDateTime = DateFormat('yyyy-MM-dd | hh:mm:ss a').format(DateTime.now());
+      formattedDateTime =
+          DateFormat('yyyy-MM-dd | hh:mm:ss a').format(DateTime.now());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     // _web.show();
-    print("SCREEN1");
-    return Scaffold(
-      // floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      // floatingActionButton: FloatingActionButton.large(
-      //   onPressed: () {
-      //     Navigator.pushNamed(context, '/qibla-screen');
-      //   },
-      //   backgroundColor: Colors.white,
-      //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      //   child: Center(
-      //     child: Image.asset(
-      //       "assets/qibla_direction1.png",
-      //       height: 70,
-      //     ),
-      //   ),
-      // ),
-      body: Stack(
-        children: [
-          Container(
-            // height: MediaQuery.of(context).size.height - 120,  //LARGE
-            height: MediaQuery.of(context).size.height - 85,
-            child: WebviewScaffold(
-              // mediaPlaybackRequiresUserGesture: true,
-              url: "https://fianz.com/",
-              withJavascript: true,
-              // persistentFooterButtons: [
-              //   TextButton(onPressed: () {}, child: Text("hello")),
-              //   TextButton(onPressed: () {}, child: Text("hello")),
-              //   TextButton(onPressed: () {}, child: Text("hello"))
-              // ],
-              geolocationEnabled: true,
-              supportMultipleWindows: true,
-              clearCache: true,
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Padding(
-              padding: EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  FloatingActionButton(
-                    onPressed: () async {
-                      _web.hide();
-                      var res = await Navigator.pushNamed<dynamic>(context, "/qibla-screen");
-                      if (res == "true") {
-                        _web.show();
-                      }
-                    },
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                    child: Center(
-                      child: Image.asset(
-                        "assets/qibla_direction1.png",
-                        height: 45,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    formattedDateTime,
-                    style: TextStyle(
-                      fontSize:
-                      // AdaptiveTextSize().getAdaptiveTextSize(context, 30),   //large
-                      AdaptiveTextSize().getAdaptiveTextSize(context, 22),
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
+    // print("SCREEN1");
+    return SafeArea(
+      child: Scaffold(
+        // floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        // floatingActionButton: FloatingActionButton.large(
+        //   onPressed: () {
+        //     Navigator.pushNamed(context, '/qibla-screen');
+        //   },
+        //   backgroundColor: Colors.white,
+        //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        //   child: Center(
+        //     child: Image.asset(
+        //       "assets/qibla_direction1.png",
+        //       height: 70,
+        //     ),
+        //   ),
+        // ),
+        body: Stack(
+          children: [
+            Container(
+              // height: MediaQuery.of(context).size.height - 120,  //LARGE
+              height: MediaQuery.of(context).size.height - 85 - MediaQuery.of(context).padding.top,
+              child: WebviewScaffold(
+                // mediaPlaybackRequiresUserGesture: true,
+                url: "https://fianz.com/",
+                withJavascript: true,
+                // persistentFooterButtons: [
+                //   TextButton(onPressed: () {}, child: Text("hello")),
+                //   TextButton(onPressed: () {}, child: Text("hello")),
+                //   TextButton(onPressed: () {}, child: Text("hello"))
+                // ],
+                geolocationEnabled: true,
+                supportMultipleWindows: true,
+                clearCache: true,
               ),
             ),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: EdgeInsets.all(15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    FloatingActionButton(
+                      onPressed: () async {
+                        _web.hide();
+                        var res = await Navigator.pushNamed<dynamic>(
+                            context, "/qibla-screen");
+                        if (res == "true") {
+                          _web.show();
+                        }
+                      },
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Center(
+                        child: Image.asset(
+                          "assets/qibla_direction1.png",
+                          height: 45,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      formattedDateTime,
+                      style: TextStyle(
+                        fontSize:
+                            // AdaptiveTextSize().getAdaptiveTextSize(context, 30),   //large
+                            AdaptiveTextSize().getAdaptiveTextSize(context, 22),
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

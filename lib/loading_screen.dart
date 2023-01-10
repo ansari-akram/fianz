@@ -26,7 +26,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   _checkPermissions() async {
     Location location = Location();
     bool permission = await location.hasPermission() == PermissionStatus.granted;
-    print("PERMISSION " + permission.toString());
+    // print("PERMISSION " + permission.toString());
     if (!permission) {
       // ScaffoldMessenger.of(context).showSnackBar(_locationNSB);
       await location.requestPermission();

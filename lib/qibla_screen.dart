@@ -29,7 +29,6 @@ class _QiblaScreenState extends State<QiblaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("SCREEN2");
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context, "true");
