@@ -15,26 +15,26 @@ class HomeScreenNew extends StatefulWidget {
 }
 
 class _HomeScreenNewState extends State<HomeScreenNew> {
-  SnackBar _locationSB = SnackBar(
-    content: Text('Device location enabled'),
-  );
-
-  SnackBar _locationNSB = SnackBar(
-    content: Text('Device location disabled'),
-  );
-
-  _checkPermissions() async {
-    Location location = Location();
-    bool permission =
-        await location.hasPermission() == PermissionStatus.granted;
-    print("PERMISSION $permission");
-    if (!permission) {
-      ScaffoldMessenger.of(context).showSnackBar(_locationNSB);
-      // await location.requestPermission();
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(_locationSB);
-    }
-  }
+  // SnackBar _locationSB = SnackBar(
+  //   content: Text('Device location enabled'),
+  // );
+  //
+  // SnackBar _locationNSB = SnackBar(
+  //   content: Text('Device location disabled'),
+  // );
+  //
+  // _checkPermissions() async {
+  //   Location location = Location();
+  //   bool permission =
+  //       await location.hasPermission() == PermissionStatus.granted;
+  //   print("PERMISSION $permission");
+  //   if (!permission) {
+  //     ScaffoldMessenger.of(context).showSnackBar(_locationNSB);
+  //     // await location.requestPermission();
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(_locationSB);
+  //   }
+  // }
 
   final FlutterWebviewPlugin _web = FlutterWebviewPlugin();
   late Timer _timer;
@@ -83,7 +83,7 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
           children: [
             Container(
               // height: MediaQuery.of(context).size.height - 120,  //LARGE
-              height: MediaQuery.of(context).size.height - 85 - MediaQuery.of(context).padding.top,
+              height: MediaQuery.of(context).size.height - 85 - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom,
               child: WebviewScaffold(
                 // mediaPlaybackRequiresUserGesture: true,
                 url: "https://fianz.com/",
