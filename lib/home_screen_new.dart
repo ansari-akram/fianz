@@ -129,7 +129,7 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                       style: TextStyle(
                         fontSize:
                             // AdaptiveTextSize().getAdaptiveTextSize(context, 30),   //large
-                            AdaptiveTextSize().getAdaptiveTextSize(context, 22),
+                            AdaptiveTextSize().getAdaptiveTextSize(context, 18),
                         color: Colors.black,
                       ),
                     ),
